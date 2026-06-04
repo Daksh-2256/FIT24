@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIT24 - Elite Fitness Club | Manavadar</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cls-primary: #c6ff00;      /* Hyper Volt Lime */
+      --cls-secondary: #00f0ff;    /* Cyber Cyan */
+      --cls-dark-base: #050608;    /* Deep Obsidian */
+      --cls-dark-surface: #0e1117; /* Dark Grey Surface */
+      --cls-dark-border: rgba(255, 255, 255, 0.06);
+      --cls-text-primary: #ffffff;
+      --cls-text-muted: #8c9bb4;
+      --cls-font-heading: 'Space Grotesk', sans-serif;
+      --cls-font-body: 'Plus Jakarta Sans', sans-serif;
+      --cls-transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--cls-font-body);
+      background-color: var(--cls-dark-base);
+      color: var(--cls-text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Selection Highlight */
+    ::selection {
+      background-color: var(--cls-primary);
+      color: var(--cls-dark-base);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--cls-dark-base);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(198, 255, 0, 0.2);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--cls-primary);
+    }
+
+    /* Background Mesh/Glows */
+    .bg-glow-top {
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80vw;
+      height: 600px;
+      background: radial-gradient(circle, rgba(198, 255, 0, 0.08) 0%, rgba(0, 240, 255, 0.02) 50%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-glow-mid {
+      position: absolute;
+      top: 1200px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Header & Navigation */
+    .hdr-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      transition: var(--cls-transition);
+      backdrop-filter: blur(12px);
+      background-color: rgba(5, 6, 8, 0.7);
+      border-bottom: 1px solid var(--cls-dark-border);
+    }
+
+    .hdr-wrapper.scrolled {
+      padding: 14px 8%;
+      background-color: rgba(5, 6, 8, 0.95);
+      border-bottom: 1px solid rgba(198, 255, 0, 0.15);
+    }
+
+    .brand-logo {
+      font-family: var(--cls-font-heading);
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      text-decoration: none;
+      color: var(--cls-text-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-logo span {
+      background: linear-gradient(135deg, var(--cls-primary), var(--cls-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--cls-text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      transition: var(--cls-transition);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links a:hover {
+      color: var(--cls-primary);
+    }
+
+    .hdr-actions {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn-action {
+      text-decoration: none;
+      font-family: var(--cls-font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 30px;
+      transition: var(--cls-transition);
+    }
+
+    .btn-action.outline {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--cls-text-primary);
+    }
+
+    .btn-action.outline:hover {
+      border-color: var(--cls-primary);
+      color: var(--cls-primary);
+    }
+
+    .btn-action.solid {
+      background: var(--cls-primary);
+      color: var(--cls-dark-base);
+      box-shadow: 0 4px 15px rgba(198, 255, 0, 0.15);
+    }
+
+    .btn-action.solid:hover {
+      background: #ffffff;
+      color: var(--cls-dark-base);
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero-showcase {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 8% 80px;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .hero-container {
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .promo-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(198, 255, 0, 0.08);
+      border: 1px solid rgba(198, 255, 0, 0.2);
+      padding: 8px 18px;
+      border-radius: 100px;
+      margin-bottom: 25px;
+      color: var(--cls-primary);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      animation: pulseGlow 3s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 5px rgba(198, 255, 0, 0.05);
+      }
+      100% {
+        box-shadow: 0 0 15px rgba(198, 255, 0, 0.2);
+      }
+    }
+
+    .hero-showcase h1 {
+      font-family: var(--cls-font-heading);
+      font-size: clamp(40px, 7vw, 80px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-showcase h1 span.gradient-text {
+      background: linear-gradient(135deg, var(--cls-primary), var(--cls-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .hero-showcase p.lead-desc {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--cls-text-muted);
+      max-width: 720px;
+      margin: 0 auto 35px;
+      font-weight: 400;
+    }
+
+    .hero-meta-badge {
+      display: inline-flex;
+      align-items: center;
+      background: var(--cls-dark-surface);
+      border: 1px solid var(--cls-dark-border);
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: var(--cls-text-primary);
+      margin-bottom: 40px;
+    }
+
+    .hero-meta-badge span {
+      color: var(--cls-primary);
+      font-weight: bold;
+      margin-right: 6px;
+    }
+
+    .hero-actions-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero {
+      font-family: var(--cls-font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: var(--cls-transition);
+    }
+
+    .btn-hero.primary {
+      background: var(--cls-primary);
+      color: var(--cls-dark-base);
+      box-shadow: 0 8px 30px rgba(198, 255, 0, 0.25);
+    }
+
+    .btn-hero.primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(198, 255, 0, 0.4);
+      background: #ffffff;
+    }
+
+    .btn-hero.secondary {
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      color: var(--cls-text-primary);
+    }
+
+    .btn-hero.secondary:hover {
+      border-color: var(--cls-primary);
+      color: var(--cls-primary);
+      transform: translateY(-2px);
+    }
+
+    /* Core Features */
+    .features-section {
+      position: relative;
+      padding: 100px 8%;
+      z-index: 10;
+    }
+
+    .section-hdr {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 60px;
+    }
+
+    .section-tag {
+      font-family: var(--cls-font-heading);
+      color: var(--cls-primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-hdr h2 {
+      font-family: var(--cls-font-heading);
+      font-size: clamp(32px, 4vw, 46px);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.2;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .benefit-card {
+      background: var(--cls-dark-surface);
+      border: 1px solid var(--cls-dark-border);
+      padding: 40px;
+      border-radius: 24px;
+      transition: var(--cls-transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(198, 255, 0, 0.03) 0%, transparent 100%);
+      opacity: 0;
+      transition: var(--cls-transition);
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(198, 255, 0, 0.3);
+      box-shadow: 0 15px 40px rgba(5, 6, 8, 0.5);
+    }
+
+    .benefit-card:hover::before {
+      opacity: 1;
+    }
+
+    .benefit-icon-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: rgba(198, 255, 0, 0.06);
+      border: 1px solid rgba(198, 255, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 25px;
+      transition: var(--cls-transition);
+    }
+
+    .benefit-card:hover .benefit-icon-box {
+      background: var(--cls-primary);
+      color: var(--cls-dark-base);
+      transform: scale(1.05) rotate(5deg);
+    }
+
+    .benefit-card h3 {
+      font-family: var(--cls-font-heading);
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .benefit-card p {
+      color: var(--cls-text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* BMI Section */
+    .bmi-section {
+      padding: 100px 8%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .bmi-card-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(14, 17, 23, 0.8), rgba(20, 24, 32, 0.8));
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--cls-dark-border);
+      border-radius: 32px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .bmi-intro {
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .bmi-intro h2 {
+      font-family: var(--cls-font-heading);
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 15px;
+    }
+
+    .bmi-intro p {
+      color: var(--cls-text-muted);
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .bmi-scale-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .bmi-scale-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 12px 18px;
+      border-radius: 12px;
+    }
+
+    .bmi-scale-item .bmi-lbl {
+      font-size: 12px;
+      color: var(--cls-text-muted);
+    }
+
+    .bmi-scale-item .bmi-val {
+      font-weight: bold;
+      margin-top: 4px;
+      font-family: var(--cls-font-heading);
+    }
+
+    .bmi-scale-item.fit .bmi-val { color: #52ffaa; }
+    .bmi-scale-item.warn .bmi-val { color: #ffbc3d; }
+    .bmi-scale-item.alert .bmi-val { color: #ff5274; }
+
+    .bmi-calculator-box {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 1px solid var(--cls-dark-border);
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .bmi-input-field {
+      margin-bottom: 22px;
+    }
+
+    .bmi-input-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--cls-text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .bmi-input-field input {
+      width: 100%;
+      background: rgba(5, 6, 8, 0.8);
+      border: 1px solid var(--cls-dark-border);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-family: var(--cls-font-body);
+      transition: var(--cls-transition);
+      outline: none;
+    }
+
+    .bmi-input-field input:focus {
+      border-color: var(--cls-primary);
+      box-shadow: 0 0 10px rgba(198, 255, 0, 0.15);
+    }
+
+    .btn-calc-submit {
+      width: 100%;
+      background: var(--cls-primary);
+      color: var(--cls-dark-base);
+      border: none;
+      font-family: var(--cls-font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 15px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: var(--cls-transition);
+    }
+
+    .btn-calc-submit:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .bmi-result-panel {
+      margin-top: 30px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: none;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bmi-result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .bmi-score-num {
+      font-family: var(--cls-font-heading);
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--cls-primary);
+    }
+
+    .bmi-status-badge {
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .bmi-status-badge.underweight { background: rgba(0, 240, 255, 0.15); color: var(--cls-secondary); }
+    .bmi-status-badge.healthy { background: rgba(82, 255, 170, 0.15); color: #52ffaa; }
+    .bmi-status-badge.overweight { background: rgba(255, 188, 61, 0.15); color: #ffbc3d; }
+    .bmi-status-badge.obese { background: rgba(255, 82, 116, 0.15); color: #ff5274; }
+
+    .bmi-advice-text {
+      font-size: 14px;
+      color: var(--cls-text-muted);
+      line-height: 1.6;
+    }
+
+    /* Pricing / Membership */
+    .membership-section {
+      padding: 100px 8%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .pricing-card-luxury {
+      max-width: 500px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, var(--cls-dark-surface) 0%, rgba(14, 17, 23, 0.7) 100%);
+      border: 1px solid var(--cls-dark-border);
+      border-radius: 28px;
+      padding: 55px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+      transition: var(--cls-transition);
+    }
+
+    .pricing-card-luxury:hover {
+      border-color: var(--cls-primary);
+      box-shadow: 0 25px 60px rgba(198, 255, 0, 0.08);
+      transform: translateY(-5px);
+    }
+
+    .pricing-card-luxury::before {
+      content: 'BEST CHOICE';
+      position: absolute;
+      top: 25px;
+      right: -35px;
+      background: var(--cls-primary);
+      color: var(--cls-dark-base);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 36px;
+      transform: rotate(45deg);
+      letter-spacing: 1px;
+    }
+
+    .plan-tag {
+      font-family: var(--cls-font-heading);
+      color: var(--cls-primary);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .plan-pricing {
+      margin: 25px 0;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .plan-pricing .currency {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--cls-text-primary);
+    }
+
+    .plan-pricing .amt {
+      font-family: var(--cls-font-heading);
+      font-size: 64px;
+      font-weight: 800;
+      color: var(--cls-text-primary);
+    }
+
+    .plan-pricing .period {
+      font-size: 15px;
+      color: var(--cls-text-muted);
+    }
+
+    .plan-features-list {
+      list-style: none;
+      text-align: left;
+      margin: 35px 0 45px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .plan-features-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      color: #dfdfdf;
+    }
+
+    .plan-features-list li::before {
+      content: '✓';
+      color: var(--cls-primary);
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .btn-pricing-cta {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+      font-family: var(--cls-font-heading);
+      text-align: center;
+      background: var(--cls-primary);
+      color: var(--cls-dark-base);
+      padding: 16px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: var(--cls-transition);
+    }
+
+    .btn-pricing-cta:hover {
+      background: white;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 100px 8%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .faq-wrapper {
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--cls-dark-surface);
+      border: 1px solid var(--cls-dark-border);
+      border-radius: 16px;
+      margin-bottom: 18px;
+      overflow: hidden;
+      transition: var(--cls-transition);
+    }
+
+    .faq-item:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .faq-question {
+      padding: 24px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-family: var(--cls-font-heading);
+      font-size: 17px;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .faq-icon {
+      font-size: 18px;
+      color: var(--cls-primary);
+      transition: transform 0.3s ease;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+      color: var(--cls-text-muted);
+      font-size: 15px;
+      padding: 0 30px;
+      line-height: 1.6;
+    }
+
+    .faq-item.active {
+      border-color: rgba(198, 255, 0, 0.2);
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-item.active .faq-answer {
+      padding-bottom: 24px;
+    }
+
+    /* Contact & Footer */
+    .foot-wrapper {
+      background: #020304;
+      border-top: 1px solid var(--cls-dark-border);
+      padding: 80px 8% 40px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .foot-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 0.8fr;
+      gap: 50px;
+      margin-bottom: 60px;
+    }
+
+    .foot-col h3 {
+      font-family: var(--cls-font-heading);
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .foot-desc {
+      color: var(--cls-text-muted);
+      font-size: 14px;
+      margin-top: 15px;
+      max-width: 320px;
+    }
+
+    .foot-contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .foot-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--cls-text-muted);
+    }
+
+    .foot-info-item svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--cls-primary);
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .foot-info-item a {
+      color: var(--cls-text-muted);
+      text-decoration: none;
+      transition: var(--cls-transition);
+    }
+
+    .foot-info-item a:hover {
+      color: var(--cls-primary);
+    }
+
+    .social-links-pack {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-social {
+      width: 44px;
+      height: 44px;
+      background: var(--cls-dark-surface);
+      border: 1px solid var(--cls-dark-border);
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cls-text-primary);
+      text-decoration: none;
+      transition: var(--cls-transition);
+      font-size: 14px;
+    }
+
+    .btn-social:hover {
+      background: var(--cls-primary);
+      color: var(--cls-dark-base);
+      border-color: var(--cls-primary);
+      transform: translateY(-3px);
+    }
+
+    .foot-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13px;
+      color: #616e84;
+    }
+
+    /* Mobile Adaptability */
+    @media (max-width: 900px) {
+      .hdr-wrapper {
+        padding: 15px 5%;
+      }
+      .nav-links {
+        display: none; /* simple, clean mobile responsive header hiding layout for brevity */
+      }
+      .hero-showcase {
+        padding-top: 140px;
+      }
+      .bmi-card-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .bmi-calculator-box {
+        border-left: none;
+        border-top: 1px solid var(--cls-dark-border);
+        padding: 40px;
+      }
+      .bmi-intro {
+        padding: 40px;
+      }
+      .foot-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background highlights -->
+  <div class="bg-glow-top"></div>
+  <div class="bg-glow-mid"></div>
+
+  <!-- Header Navigation -->
+  <header class="hdr-wrapper" id="home-navbar">
+    <a href="#" class="brand-logo">FIT<span>24</span></a>
+    
+    <ul class="nav-links">
+      <li><a href="#benefits">Features</a></li>
+      <li><a href="#calculator">BMI Calculator</a></li>
+      <li><a href="#membership">Membership</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+    </ul>
+
+    <div class="hdr-actions">
+      <a href="mailto:info@fit24fitness.com" class="btn-action outline">Mail Us</a>
+      <a href="#membership" class="btn-action solid">Join Now</a>
+    </div>
+  </header>
+
+  <!-- Main Section Showcase -->
+  <main>
+    
+    <!-- Hero Banner -->
+    <section class="hero-showcase">
+      <div class="hero-container">
+        <div class="promo-pill">⭐ Junagadh's Leading Fitness Club</div>
+        
+        <h1>DEFY LIMITS.<br><span class="gradient-text">SHAPE YOUR FUTURE.</span></h1>
+        
+        <p class="lead-desc">Welcome to Fit24 Fitness Club, Manavadar's trusted environment for ultimate physical transformation. Equipping you with high-caliber training modules and modern strength machinery.</p>
+        
+        <div class="hero-meta-badge">
+          📍 Madhav Arcade, K.D. Cinema Road, Manavadar
+        </div>
+
+        <div class="hero-actions-group">
+          <a href="#membership" class="btn-hero primary">Start Your Journey</a>
+          <a href="#calculator" class="btn-hero secondary">Calculate Your BMI</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Us benefits -->
+    <section class="features-section" id="benefits">
+      <div class="section-hdr">
+        <span class="section-tag">High Performance</span>
+        <h2>Why Train At Fit24?</h2>
+      </div>
+
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon-box">🏋️</div>
+          <h3>Modern Arsenal</h3>
+          <p>Full suite of cutting-edge cardiovascular and strength conditioning equipment, ensuring premium versatility for every training session.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon-box">💪</div>
+          <h3>Elite Mentorship</h3>
+          <p>Certified training coaches dedicated to structuring progressive workout regimes tailored precisely to your anatomy and health objectives.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon-box">🕐</div>
+          <h3>Flexible Windows</h3>
+          <p>Open daily until 9:00 PM. Seamlessly adapt your workout schedule between morning energies or late evening routines at your convenience.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BMI Calculator Module -->
+    <section class="bmi-section" id="calculator">
+      <div class="bmi-card-wrapper">
+        <div class="bmi-intro">
+          <span class="section-tag">Interactive Tools</span>
+          <h2>Body Mass Index</h2>
+          <p>Calculate your Body Mass Index (BMI) instantly to establish a benchmark for your fitness and training blueprint.</p>
+          
+          <div class="bmi-scale-grid">
+            <div class="bmi-scale-item fit">
+              <div class="bmi-lbl">Healthy Range</div>
+              <div class="bmi-val">18.5 – 24.9</div>
+            </div>
+            <div class="bmi-scale-item warn">
+              <div class="bmi-lbl">Underweight</div>
+              <div class="bmi-val">&lt; 18.5</div>
+            </div>
+            <div class="bmi-scale-item warn">
+              <div class="bmi-lbl">Overweight</div>
+              <div class="bmi-val">25.0 – 29.9</div>
+            </div>
+            <div class="bmi-scale-item alert">
+              <div class="bmi-lbl">Obese Category</div>
+              <div class="bmi-val">≥ 30.0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bmi-calculator-box">
+          <div class="bmi-input-field">
+            <label for="height-input">Height (cm)</label>
+            <input type="number" id="height-input" placeholder="e.g., 175" min="100" max="250">
+          </div>
+
+          <div class="bmi-input-field">
+            <label for="weight-input">Weight (kg)</label>
+            <input type="number" id="weight-input" placeholder="e.g., 70" min="30" max="200">
+          </div>
+
+          <button class="btn-calc-submit" onclick="computeUserBMI()">Calculate BMI</button>
+
+          <!-- Result output -->
+          <div class="bmi-result-panel" id="bmi-output-panel">
+            <div class="bmi-result-header">
+              <span class="bmi-score-num" id="bmi-number">22.8</span>
+              <span class="bmi-status-badge healthy" id="bmi-status">Healthy</span>
+            </div>
+            <p class="bmi-advice-text" id="bmi-advice">Great job! You maintain a balanced weight. Keep up the clean diet and strength routines at FIT24.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Membership Details -->
+    <section class="membership-section" id="membership">
+      <div class="section-hdr">
+        <span class="section-tag">Affordable Pricing</span>
+        <h2>Select Your Membership</h2>
+      </div>
+
+      <div class="pricing-card-luxury">
+        <span class="plan-tag">Elite Performance</span>
+        <div class="plan-pricing">
+          <span class="currency">₹</span>
+          <span class="amt">1499</span>
+          <span class="period">/ month</span>
+        </div>
+        <p style="color: var(--cls-text-muted); font-size: 14px; margin-top: -10px;">Flexible duration • Cancel at any time</p>
+
+        <ul class="plan-features-list">
+          <li>Full Access to all gym amenities</li>
+          <li>1 Personal coaching consultation/week</li>
+          <li>Structured diet & lifestyle guidelines</li>
+          <li>Private safety locker facility</li>
+          <li>Access to modern dynamic group modules</li>
+        </ul>
+
+        <a href="mailto:info@fit24fitness.com?subject=Gym%20Membership%20Inquiry" class="btn-pricing-cta">Get Started Now</a>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faqs">
+      <div class="section-hdr">
+        <span class="section-tag">Common Inquiries</span>
+        <h2>Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-wrapper">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What are the daily operating hours?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            FIT24 operates daily, accommodating early mornings and evening rushes. The facility remains fully open until 9:00 PM everyday.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Are personal training services available?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Yes! Our pricing plan includes one dedicated trainer session per week. For full-time 1-on-1 personal guidance, you can speak directly with our coaches at the front desk.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Where is the gym located exactly?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Our premium facility is located in Madhav Arcade, K.D. Cinema Road/Chamber Road, Manavadar, Junagadh. Feel free to visit us for a free tour!
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer block -->
+  <footer class="foot-wrapper">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <a href="#" class="brand-logo">FIT<span>24</span></a>
+        <p class="foot-desc">Providing high-performance fitness coaching, body transformation programs, and modern strength equipment in Junagadh.</p>
+      </div>
+
+      <div class="foot-col">
+        <h3>Location & Contact</h3>
+        <div class="foot-contact-details">
+          <div class="foot-info-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span>Madhav Arcade, K.D. Cinema Road,<br>Chamber Road, Manavadar,<br>Junagadh - 362630</span>
+          </div>
+          <div class="foot-info-item">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span><a href="mailto:info@fit24fitness.com">info@fit24fitness.com</a></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot-col">
+        <h3>Connect With Us</h3>
+        <p class="foot-desc" style="margin-top: 0; margin-bottom: 20px;">Join our community on social channels and stay updated on events and fitness tips.</p>
+        <div class="social-links-pack">
+          <a href="#" class="btn-social" aria-label="Instagram">IG</a>
+          <a href="#" class="btn-social" aria-label="Facebook">FB</a>
+          <a href="#" class="btn-social" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 FIT24 Fitness Club. All Rights Reserved.</span>
+      <span>Designed with Excellence</span>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript -->
+  <script>
+    // Header background opacity transformation on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('home-navbar');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // FAQ Accordion toggles
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const isActive = item.classList.contains('active');
+
+        // Close all other open items
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('active');
+            otherItem.querySelector('.faq-answer').style.maxHeight = null;
+          }
+        });
+
+        // Toggle active status
+        if (isActive) {
+          item.classList.remove('active');
+          answer.style.maxHeight = null;
+        } else {
+          item.classList.add('active');
+          answer.style.maxHeight = answer.scrollHeight + "px";
+        }
+      });
+    });
+
+    // BMI Calculation Logic
+    function computeUserBMI() {
+      const heightInput = document.getElementById('height-input').value;
+      const weightInput = document.getElementById('weight-input').value;
+      const resultPanel = document.getElementById('bmi-output-panel');
+      const scoreNum = document.getElementById('bmi-number');
+      const statusBadge = document.getElementById('bmi-status');
+      const adviceText = document.getElementById('bmi-advice');
+
+      if (!heightInput || !weightInput || heightInput <= 0 || weightInput <= 0) {
+        alert("Please enter valid height and weight values.");
+        return;
+      }
+
+      // Formula: Weight (kg) / (Height (m) ^ 2)
+      const heightInMeters = heightInput / 100;
+      const bmi = (weightInput / (heightInMeters * heightInMeters)).toFixed(1);
+
+      scoreNum.innerText = bmi;
+
+      // Reset badge classes
+      statusBadge.className = 'bmi-status-badge';
+
+      let status = '';
+      let advice = '';
+
+      if (bmi < 18.5) {
+        status = 'Underweight';
+        statusBadge.classList.add('underweight');
+        advice = 'Focus on increasing your caloric intake with nutrient-dense meals and structured strength training at FIT24 to build lean muscle mass.';
+      } else if (bmi >= 18.5 && bmi < 25) {
+        status = 'Healthy';
+        statusBadge.classList.add('healthy');
+        advice = 'Excellent status! You have a balanced weight. Keep sustaining your physique with consistent conditioning workouts and balanced protein nutrition.';
+      } else if (bmi >= 25 && bmi < 30) {
+        status = 'Overweight';
+        statusBadge.classList.add('overweight');
+        advice = 'Consider structuring a calorie deficit, increasing active cardio routines, and focusing on moderate weights at FIT24 to trim fat safely.';
+      } else {
+        status = 'Obese';
+        statusBadge.classList.add('obese');
+        advice = 'Prioritize physical cardio activity and customized nutrition blueprint planning. Our expert trainers at FIT24 are ready to assist you safely.';
+      }
+
+      statusBadge.innerText = status;
+      adviceText.innerText = advice;
+      resultPanel.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
